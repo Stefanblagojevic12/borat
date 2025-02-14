@@ -56,10 +56,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to end loading screen
     function endLoadingScreen() {
+        // Keep the video container
+        const videoContainer = document.querySelector('.video-container');
+        
+        // Add minimized class instead of inline styles
+        videoContainer.classList.add('minimized');
+        
+        // Move video to body
+        document.body.appendChild(videoContainer);
+        
+        // Fade out and remove loading screen (except video)
         loadingScreen.style.opacity = '0';
         loadingScreen.style.transition = 'opacity 0.5s';
         wrapper.style.display = 'block';
+        
         setTimeout(() => {
+            // Remove loading screen but keep video
+            while (loadingScreen.firstChild) {
+                if (loadingScreen.firstChild !== videoContainer) {
+                    loadingScreen.removeChild(loadingScreen.firstChild);
+                }
+            }
             loadingScreen.remove();
         }, 500);
     }
@@ -291,16 +308,29 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
         
         if (isBot) {
+            // Create message container to properly align avatar and text
+            const messageContainer = document.createElement('div');
+            messageContainer.className = 'message-container';
+            
+            // Add bot avatar
             const img = document.createElement('img');
-            img.src = 'borat-ai.png';
+            img.src = 'images/borat-ai.png';
             img.alt = 'BoratGPT';
             img.className = 'bot-avatar';
-            messageDiv.appendChild(img);
+            messageContainer.appendChild(img);
+            
+            // Add message text
+            const p = document.createElement('p');
+            p.textContent = text;
+            messageContainer.appendChild(p);
+            
+            messageDiv.appendChild(messageContainer);
+        } else {
+            // User message just needs text
+            const p = document.createElement('p');
+            p.textContent = text;
+            messageDiv.appendChild(p);
         }
-        
-        const p = document.createElement('p');
-        p.textContent = text;
-        messageDiv.appendChild(p);
         
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;

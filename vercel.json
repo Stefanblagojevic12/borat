@@ -8,6 +8,15 @@
   ],
   "routes": [
     {
+      "src": "/images/(.*)",
+      "headers": { 
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "pragma": "no-cache",
+        "expires": "0"
+      },
+      "dest": "/images/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
