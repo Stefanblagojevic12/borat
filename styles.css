@@ -580,23 +580,21 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background-color: var(--background-color);
-    z-index: 9999;
+    background: var(--background-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    gap: 30px;
+    z-index: 1000;
+    padding: 20px;
 }
 
 .terminal {
-    width: 90%;
+    width: 100%;
     max-width: 800px;
     background: rgba(0, 255, 0, 0.1);
-    border: 2px solid var(--primary-color);
     border-radius: 10px;
     padding: 30px;
     margin-bottom: 20px;
@@ -607,15 +605,15 @@ body {
 }
 
 .video-container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 20px 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    aspect-ratio: 16/9;
+    position: relative;
     border: 2px solid var(--primary-color);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
-    aspect-ratio: 16/9;
-    position: relative;
 }
 
 .video-container iframe {
@@ -624,6 +622,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    border: none;
 }
 
 .terminal-content p {
